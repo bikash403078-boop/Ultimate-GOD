@@ -15,7 +15,7 @@ python main.py
 
 ## Public URL checks
 
-In the CLI, choose **8** to inspect one public URL, **9** to check the five suggested username profile URLs, or **10** to retrieve DuckDuckGo public search results (when the provider permits access). Choose **12** to extract readable text, metadata, and links from a public HTML page. It records the HTTP response, final URL, page title, and available description metadata when a site permits access.
+Run `python main.py` to start the automatic guided workflow directly; there is no separate operations menu. It asks for username, phone/WhatsApp lead, local image path, public social profile URL, name/search terms, and an authorized domain in sequence. Press Enter or type `skip` for unknown fields. It automatically attempts relevant public-source checks and saves one combined JSON report. It records the HTTP response, final URL, page title, and available description metadata when a site permits access.
 
 - `http-success` means the URL returned a successful HTTP response, **not** that an account is authentic.
 - `http-error` may mean missing, blocked, or rate-limited.
@@ -42,7 +42,7 @@ Open `http://127.0.0.1:8765` on the same device. The server binds to localhost.
 - Local-only web dashboard
 - Tests
 
-## Guided investigation\n\nChoose **13** in the menu. Enter whatever inputs you have and press Enter or type `skip` for unknown fields. The workflow combines public search attempts, username candidate checks, extraction from a supplied public page, passive domain data for an authorized domain, and local image hashing (optional EXIF support if Pillow is installed). It writes a single JSON report. Phone numbers are stored only as leads; the tool does not identify phone owners or retrieve private WhatsApp data. It does not log into social platforms, collect private account history, or scrape behind-login content.\n\n## Passive domain intelligence
+## Guided investigation\n\nEnter whatever inputs you have in the guided prompts and press Enter or type `skip` for unknown fields. The workflow combines public search attempts, username candidate checks, extraction from a supplied public page, passive domain data for an authorized domain, and local image hashing (optional EXIF support if Pillow is installed). It writes a single JSON report. Phone numbers are stored only as leads; the tool does not identify phone owners or retrieve private WhatsApp data. It does not search for, infer, or display Aadhaar/passport numbers. Government ID verification should use official, consent-based channels. It does not log into social platforms, collect private account history, or scrape behind-login content.\n\n## Passive domain intelligence
 
 Choose **11** in the CLI and enter a domain you own or are authorized to assess. The module queries public RDAP and Certificate Transparency sources and resolves DNS. It does not scan ports, exploit services, or establish that certificate-listed hosts are currently online. Public sources can fail or return incomplete data.
 
