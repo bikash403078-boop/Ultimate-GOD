@@ -1,6 +1,6 @@
 """Interactive CLI for Ultimate GOD."""
 from .core import new_case, add_lead, add_finding, username_candidates, url_details, save_json
-from .collector import check_public_url, check_username, search_public_web
+from .collector import check_public_url, check_username, search_public_web\nfrom .domainintel import investigate_domain
 
 
 def ask(prompt: str) -> str:
@@ -14,7 +14,7 @@ def main() -> None:
     while True:
         print("\n1) Add name lead  2) Username candidates  3) Phone-format lead")
         print("4) Inspect URL  5) Add sourced finding  6) View case  7) Export JSON")
-        print("8) Check public URL  9) Check username candidates  10) Search public web  0) Exit")
+        print("8) Check public URL  9) Check username candidates  10) Search public web")\n        print("11) Passive domain intelligence  0) Exit")
         choice = ask("> ")
         try:
             if choice == "1":
@@ -80,6 +80,27 @@ def main() -> None:
                     add_finding(case, "Public web result: " + item["title"], item["url"],
                                 "Search result lead for query: " + query + ". Verify the page and identity manually.",
                                 "unverified")
+            elif choice == "11":
+                domain = ask("Domain you own or are authorized to assess (e.g. example.com): ")
+                report = investigate_domain(domain)
+                print("\\n=== Passive domain intelligence ===")
+                print(f"Domain: {report['domain']} | Collected: {report['collected_at']}")
+                print(f"DNS addresses: {report['dns'] or '(none returned)'}")
+                print(f"Certificate names ({len(report['certificates'])}):")
+                for name in report["certificates"][:100]:
+                    print(" - " + name)
+                print(f"Registration: {report['registration'] or '(unavailable)'}")
+                print(f"Source status: {report['summary']}")
+                if report["errors"]:
+                    print(f"Source errors: {report['errors']}")
+                for source in report["sources"]:
+                    add_finding(case, "Domain source: " + source["name"], source["url"],
+                                "Status: " + source["status"] + "; domain: " + domain, "unverified")
+                path = ask("Save full domain report [ultimate_god_domain_report.json]: ") or "ultimate_god_domain_report.json"
+                from pathlib import Path
+                import json
+                Path(path).write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\\n", encoding="utf-8")
+                print(f"Saved full report: {path}")
             elif choice == "0":
                 print("Goodbye. Verify findings at their original sources.")
                 break
