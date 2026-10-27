@@ -44,14 +44,14 @@ def run_guided_investigation() -> None:
     print("\n=== Ultimate GOD | Guided public-source investigation ===")
     print("Enter known information; press Enter or type 'skip' for anything unknown.")
     print("Use this only for yourself, an authorized assessment, or a legitimate public-interest case.")
-    title = _prompt("Case title [optional]: ") or "Guided investigation"
+    title = "Automatic guided investigation"
     case = new_case(title)
-    target_name = _prompt("1/6 Name or search keywords: ")
-    username = _prompt("2/6 Username (without @): ")
-    phone = _prompt("3/6 Phone number (stored as a lead only; no owner lookup): ")
-    social_url = _prompt("4/6 Public social profile URL: ")
-    image_path = _prompt("5/6 Local image path (optional; Enter to skip): ")
-    domain = _prompt("6/6 Public website/domain you are authorized to research: ")
+    username = _prompt("1/6 Enter username (or press Enter to skip): ")
+    phone = _prompt("2/6 Enter phone/WhatsApp number (stored as a lead only; no owner lookup; or skip): ")
+    image_path = _prompt("3/6 Enter local image file path (not an image URL; or skip): ")
+    social_url = _prompt("4/6 Enter public social-media profile URL (or skip): ")
+    target_name = _prompt("5/6 Enter name / public search keywords (or skip): ")
+    domain = _prompt("6/6 Enter public website/domain you own or are authorized to assess (or skip): ")
 
     if target_name:
         add_lead(case, "name/search-keywords", target_name)
@@ -75,7 +75,8 @@ def run_guided_investigation() -> None:
               "search_results": [], "username_checks": [], "page_extract": None,
               "image_analysis": None, "notes": [
                   "A matching name or username is not proof of identity.",
-                  "No private-account access, login scraping, message collection, or location tracking is performed."
+                  "No private-account access, login scraping, message collection, or location tracking is performed.",
+                  "Government ID numbers (Aadhaar/passport) are not searched, inferred, or displayed; use official consent-based verification channels instead."
               ], "errors": []}
 
     queries = []
@@ -142,7 +143,7 @@ def run_guided_investigation() -> None:
                                      "message": str(exc)[:250]})
 
     report["case"] = case
-    out = _prompt("Output JSON report path [ultimate_god_investigation.json]: ") or "ultimate_god_investigation.json"
+    out = "ultimate_god_investigation.json"
     Path(out).expanduser().write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print("\n=== Investigation summary ===")
     print(f"Public search results: {len(report['search_results'])}")
@@ -150,5 +151,5 @@ def run_guided_investigation() -> None:
     print(f"Public page extracted: {'yes' if report['page_extract'] else 'no'}")
     print(f"Image analyzed locally: {'yes' if report['image_analysis'] else 'no'}")
     print(f"Errors / blocked sources: {len(report['errors'])}")
-    print(f"Report saved to: {out}")
+    print(f"Report saved automatically to: {out}")
     print("Review every source manually; a result is a lead, not identity confirmation.")
