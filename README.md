@@ -15,7 +15,7 @@ python main.py
 
 ## Public URL checks
 
-In the CLI, choose **8** to inspect one public URL or **9** to check the five suggested username profile URLs. It records the HTTP response, final URL, page title, and available description metadata when a site permits access.
+In the CLI, choose **8** to inspect one public URL, **9** to check the five suggested username profile URLs, or **10** to search the public web through DuckDuckGo HTML results. It records the HTTP response, final URL, page title, and available description metadata when a site permits access.
 
 - `http-success` means the URL returned a successful HTTP response, **not** that an account is authentic.
 - `http-error` may mean missing, blocked, or rate-limited.
@@ -35,7 +35,7 @@ Open `http://127.0.0.1:8765` on the same device. The server binds to localhost.
 ## Features
 
 - Guided CLI for name, username, phone-format, and URL leads
-- Public profile URL candidates and basic public-page checks
+- Public profile URL candidates and basic public-page checks\n- Optional DuckDuckGo public web search for name/username/keyword leads
 - URL/domain parsing
 - Manually recorded findings with source URLs and confidence labels
 - JSON case export
@@ -44,7 +44,7 @@ Open `http://127.0.0.1:8765` on the same device. The server binds to localhost.
 
 ## Current limitations
 
-This is an early-stage organizer. It does **not** provide general web search, reverse-image search, phone-owner lookup, private account data, or identity matching. Name leads must currently be researched manually and findings entered with their source links.
+This is an early-stage organizer. It does **not** provide general web search, reverse-image search, phone-owner lookup, private account data, or identity matching. Public search can be rate-limited or unavailable and does not guarantee comprehensive results. Name leads still require manual verification and careful review of each source.
 
 ## Tests
 
