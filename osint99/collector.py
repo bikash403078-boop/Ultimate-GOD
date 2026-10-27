@@ -76,3 +76,13 @@ def check_username(username: str) -> list[dict]:
         item["service"] = candidate["service"]
         results.append(item)
     return results
+
+
+def search_public_web(query: str, timeout: int = 10, limit: int = 8) -> list[dict]:
+    """Return a public search URL when automated search results are unavailable."""
+    from urllib.parse import urlencode
+    query = query.strip()
+    if not query:
+        raise ValueError("Search query is required.")
+    url = "https://duckduckgo.com/?" + urlencode({"q": query})
+    return [{"title": "Open public web search (review results manually)", "url": url}]
