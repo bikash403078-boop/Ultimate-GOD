@@ -61,7 +61,7 @@ def check_public_url(value: str, timeout: int = 8) -> dict:
         result["status"] = exc.code
         result["final_url"] = exc.geturl() or url
         result["result"] = "http-error"
-        result["note"] = "The site returned an HTTP error; blocked, rate-limited, and missing pages may look similar."
+        result["note"] = "Inconclusive: the site returned an HTTP error; blocked, rate-limited, and missing pages may look similar."
     except (URLError, TimeoutError, OSError, ValueError) as exc:
         result["result"] = "network-error"
         result["note"] = f"Could not verify the page: {type(exc).__name__}. Network failures are inconclusive."
