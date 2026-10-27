@@ -15,7 +15,7 @@ python main.py
 
 ## Public URL checks
 
-In the CLI, choose **8** to inspect one public URL, **9** to check the five suggested username profile URLs, or **10** to search the public web through DuckDuckGo HTML results. It records the HTTP response, final URL, page title, and available description metadata when a site permits access.
+In the CLI, choose **8** to inspect one public URL, **9** to check the five suggested username profile URLs, or **10** to retrieve DuckDuckGo public search results (when the provider permits access). Choose **12** to extract readable text, metadata, and links from a public HTML page. It records the HTTP response, final URL, page title, and available description metadata when a site permits access.
 
 - `http-success` means the URL returned a successful HTTP response, **not** that an account is authentic.
 - `http-error` may mean missing, blocked, or rate-limited.
