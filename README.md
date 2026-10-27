@@ -36,11 +36,15 @@ Open `http://127.0.0.1:8765` on the same device. The server binds to localhost.
 
 - Guided CLI for name, username, phone-format, and URL leads
 - Public profile URL candidates and basic public-page checks\n- Optional DuckDuckGo public web search for name/username/keyword leads
-- URL/domain parsing
+- URL/domain parsing\n- Passive domain intelligence using public RDAP, DNS resolution, and certificate-transparency data for authorized domains
 - Manually recorded findings with source URLs and confidence labels
 - JSON case export
 - Local-only web dashboard
 - Tests
+
+## Passive domain intelligence
+
+Choose **11** in the CLI and enter a domain you own or are authorized to assess. The module queries public RDAP and Certificate Transparency sources and resolves DNS. It does not scan ports, exploit services, or establish that certificate-listed hosts are currently online. Public sources can fail or return incomplete data.
 
 ## Current limitations
 
