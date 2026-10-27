@@ -1,6 +1,7 @@
 """Interactive CLI for Ultimate GOD."""
 from .core import new_case, add_lead, add_finding, username_candidates, url_details, save_json
-from .collector import check_public_url, check_username, search_public_web\nfrom .domainintel import investigate_domain
+from .collector import check_public_url, check_username, search_public_web
+from .domainintel import investigate_domain
 
 
 def ask(prompt: str) -> str:
