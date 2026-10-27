@@ -2,6 +2,7 @@
 from .core import new_case, add_lead, add_finding, username_candidates, url_details, save_json
 from .collector import check_public_url, check_username, search_public_web
 from .domainintel import investigate_domain
+from .wizard import run_guided_investigation
 
 
 def ask(prompt: str) -> str:
@@ -16,7 +17,8 @@ def main() -> None:
         print("\n1) Add name lead  2) Username candidates  3) Phone-format lead")
         print("4) Inspect URL  5) Add sourced finding  6) View case  7) Export JSON")
         print("8) Check public URL  9) Check username candidates  10) Search public web")
-        print("11) Passive domain intelligence  12) Extract public page  0) Exit")
+        print("11) Passive domain intelligence  12) Extract public page")
+        print("13) Guided investigation (optional inputs + combined report)  0) Exit")
         choice = ask("> ")
         try:
             if choice == "1":
@@ -117,6 +119,8 @@ def main() -> None:
                 add_finding(case, "Public page extracted: " + (page["title"] or page["final_url"]),
                             page["final_url"], "Description: " + page["description"] + "\\nText excerpt: " + page["text"][:2000],
                             "unverified")
+            elif choice == "13":
+                run_guided_investigation()
             elif choice == "0":
                 print("Goodbye. Verify findings at their original sources.")
                 break
