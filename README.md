@@ -34,7 +34,7 @@ Open `http://127.0.0.1:8765` on the same device. The server binds to localhost.
 
 ## Features
 
-- Guided CLI for name, username, phone-format, and URL leads
+- Guided investigation wizard: name, username, phone lead, social URL, local image, and authorized domain; unknown fields can be skipped\n- Combined JSON report with source links, public search leads, username checks, page extraction, domain intelligence, and local image hash/optional metadata
 - Public profile URL candidates and basic public-page checks\n- Optional DuckDuckGo public web search for name/username/keyword leads
 - URL/domain parsing\n- Passive domain intelligence using public RDAP, DNS resolution, and certificate-transparency data for authorized domains
 - Manually recorded findings with source URLs and confidence labels
@@ -42,7 +42,7 @@ Open `http://127.0.0.1:8765` on the same device. The server binds to localhost.
 - Local-only web dashboard
 - Tests
 
-## Passive domain intelligence
+## Guided investigation\n\nChoose **13** in the menu. Enter whatever inputs you have and press Enter or type `skip` for unknown fields. The workflow combines public search attempts, username candidate checks, extraction from a supplied public page, passive domain data for an authorized domain, and local image hashing (optional EXIF support if Pillow is installed). It writes a single JSON report. Phone numbers are stored only as leads; the tool does not identify phone owners or retrieve private WhatsApp data. It does not log into social platforms, collect private account history, or scrape behind-login content.\n\n## Passive domain intelligence
 
 Choose **11** in the CLI and enter a domain you own or are authorized to assess. The module queries public RDAP and Certificate Transparency sources and resolves DNS. It does not scan ports, exploit services, or establish that certificate-listed hosts are currently online. Public sources can fail or return incomplete data.
 
