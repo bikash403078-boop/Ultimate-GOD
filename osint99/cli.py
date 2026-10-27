@@ -15,7 +15,8 @@ def main() -> None:
     while True:
         print("\n1) Add name lead  2) Username candidates  3) Phone-format lead")
         print("4) Inspect URL  5) Add sourced finding  6) View case  7) Export JSON")
-        print("8) Check public URL  9) Check username candidates  10) Search public web")\n        print("11) Passive domain intelligence  0) Exit")
+        print("8) Check public URL  9) Check username candidates  10) Search public web")
+        print("11) Passive domain intelligence  0) Exit")
         choice = ask("> ")
         try:
             if choice == "1":
