@@ -1,6 +1,6 @@
 """Interactive CLI for Ultimate GOD."""
 from .core import new_case, add_lead, add_finding, username_candidates, url_details, save_json
-from .collector import check_public_url, check_username
+from .collector import check_public_url, check_username, search_public_web
 
 
 def ask(prompt: str) -> str:
@@ -14,7 +14,7 @@ def main() -> None:
     while True:
         print("\n1) Add name lead  2) Username candidates  3) Phone-format lead")
         print("4) Inspect URL  5) Add sourced finding  6) View case  7) Export JSON")
-        print("8) Check public URL  9) Check username profile candidates  0) Exit")
+        print("8) Check public URL  9) Check username candidates  10) Search public web  0) Exit")
         choice = ask("> ")
         try:
             if choice == "1":
@@ -70,6 +70,16 @@ def main() -> None:
                                 result["final_url"], f"HTTP status: {result['status']}; "
                                 f"title: {result['page_title']}; description: {result['description']}; "
                                 f"note: {result['note']}", "unverified")
+            elif choice == "10":
+                query = ask("Public web search query (name/username/keywords): ")
+                results = search_public_web(query)
+                if not results:
+                    print("No results parsed. Search may be blocked or have changed format; try manually.")
+                for i, item in enumerate(results, 1):
+                    print(f"{i}. {item['title']}\\n   {item['url']}")
+                    add_finding(case, "Public web result: " + item["title"], item["url"],
+                                "Search result lead for query: " + query + ". Verify the page and identity manually.",
+                                "unverified")
             elif choice == "0":
                 print("Goodbye. Verify findings at their original sources.")
                 break
