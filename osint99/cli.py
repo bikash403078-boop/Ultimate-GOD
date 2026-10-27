@@ -16,7 +16,7 @@ def main() -> None:
         print("\n1) Add name lead  2) Username candidates  3) Phone-format lead")
         print("4) Inspect URL  5) Add sourced finding  6) View case  7) Export JSON")
         print("8) Check public URL  9) Check username candidates  10) Search public web")
-        print("11) Passive domain intelligence  0) Exit")
+        print("11) Passive domain intelligence  12) Extract public page  0) Exit")
         choice = ask("> ")
         try:
             if choice == "1":
@@ -78,7 +78,7 @@ def main() -> None:
                 if not results:
                     print("No results parsed. Search may be blocked or have changed format; try manually.")
                 for i, item in enumerate(results, 1):
-                    print(f"{i}. {item['title']}\\n   {item['url']}")
+                    print(f"{i}. {item['title']}\n   {item['url']}\n   {item.get('snippet', '')}")
                     add_finding(case, "Public web result: " + item["title"], item["url"],
                                 "Search result lead for query: " + query + ". Verify the page and identity manually.",
                                 "unverified")
@@ -103,6 +103,20 @@ def main() -> None:
                 import json
                 Path(path).write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\\n", encoding="utf-8")
                 print(f"Saved full report: {path}")
+            elif choice == "12":
+                from .collector import fetch_public_page
+                url = ask("Public page URL: ")
+                page = fetch_public_page(url)
+                print(f"\\nTitle: {page['title'] or '(none)'}")
+                print(f"URL: {page['final_url']} | HTTP: {page['status']}")
+                print(f"Description: {page['description'] or '(none)'}")
+                print(f"\\nExtracted text (up to 12,000 chars):\\n{page['text'] or '(no readable text)'}")
+                print(f"\\nLinks found: {len(page['links'])}")
+                for link in page["links"][:30]:
+                    print(" - " + link)
+                add_finding(case, "Public page extracted: " + (page["title"] or page["final_url"]),
+                            page["final_url"], "Description: " + page["description"] + "\\nText excerpt: " + page["text"][:2000],
+                            "unverified")
             elif choice == "0":
                 print("Goodbye. Verify findings at their original sources.")
                 break
